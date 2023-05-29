@@ -27,7 +27,7 @@ class PromptFileStore(PromptStore):
     def loads(self) -> Dict[str, Tuple[str, PromptTemplate]]:
         prompts = {}
         try:
-            with open(self.custom_prompts_file, "r") as f:
+            with open(self.custom_prompts_file, "r", encoding="utf-8", errors="ignore") as f:
                 r = json.load(f)
                 for k, v in r.items():
                     prompts[k] = (CUSTOM, PromptTemplate(
@@ -122,7 +122,7 @@ class Store(object):
     
     def _load(self):
         prompts = {}
-        with open(self.prompts_file, "r") as f:
+        with open(self.prompts_file, "r", encoding="utf-8", errors="ignore") as f:
             r = json.load(f)
             for k, v in r.items():
                 prompts[k] = (SYSTEM, PromptTemplate(
